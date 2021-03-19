@@ -1,0 +1,16 @@
+version: "3"
+services:
+  db:
+    image: "postgres"
+    env_file:
+      - database.env
+    volumes:
+      - db:/var/lib/postgresql/data/
+  app:
+    build: .
+    links:
+      - db
+    ports:
+      - "80:80"
+volumes:
+  db: # named volumes can be managed easier using docker-compose
